@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">FMS16</string>
+    <string name="Cartell">CARTELL</string>
+    <string name="Alertes">ALERTES</string>
+    <string name="Temps">TEMPS</string>
+    <string name="Xat">DISCUSSIÓ GENERAL</string>
+    <string name="Acts">ACTIVITATS DAVUI</string>
+    <string name="Quiz">SENTERADA QUIZ</string>
+    <string-array name="activitats">
+        <item>act1</item>
+        <item>act2</item>
+        <item>act3</item>
+        <item>act4</item>
+    </string-array>
+</resources>
