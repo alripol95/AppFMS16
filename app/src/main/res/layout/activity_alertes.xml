@@ -10,6 +10,5 @@
         android:layout_height="wrap_content"
         android:id="@+id/actsList"
         android:layout_centerHorizontal="true"
-        android:layout_alignParentTop="true"
-        android:entries="@array/activitats" />
+        android:layout_alignParentTop="true" />
 </RelativeLayout>

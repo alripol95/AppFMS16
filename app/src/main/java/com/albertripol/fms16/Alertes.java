@@ -6,8 +6,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.provider.CalendarContract;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -16,42 +18,27 @@ import java.util.Calendar;
 
 public class Alertes extends Activity {
 
-    private boolean primer = true;
-    private ArrayList<Activitat> info = new ArrayList<>();
     private Activitat act;
-    private boolean confirm;
+    private ArrayList<Activitat> info;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alertes);
-
-        int n=4;
-        if(primer){
-            for(int i=0; i<n; i++){
-                act = new Activitat();
-                act.afegit=false;
-                act.day=12;
-                act.desc="descripcio";
-                act.dur=2;
-                act.h=15;
-                act.lloc="lloc";
-                act.min=0;
-                act.titol="act"+i;
-                info.add(act);
-            }
-            primer = false;
-        }
-        registrarEventos();
+        info = Controlador.getInfo();
+        if(info.size()==0) Toast.makeText(Alertes.this, "No hi ha activitats", Toast.LENGTH_LONG).show();
+        else registrarEventos();
     }
 
     private void addEventToCalendar(String a){
         boolean noTrobat = true;
         for(int i=0; i<info.size() && noTrobat; i++){
             act = info.get(i);
-            if(act.titol.equals(a))noTrobat=false;
+            if(act.nom.equals(a))noTrobat=false;
         }
+
         if(act.afegit) confirmDialog();
-        if(confirm) {
+        if(!act.afegit) {
+            act.afegit=true;
             Calendar cal = Calendar.getInstance();
 
             cal.set(Calendar.DAY_OF_MONTH, act.day);
@@ -68,8 +55,7 @@ public class Alertes extends Activity {
             intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, cal.getTimeInMillis() + act.dur * 3600000);
 
             intent.putExtra(CalendarContract.Events.ALL_DAY, false);
-            intent.putExtra(CalendarContract.Events.RRULE, "FREQ=DAILY");
-            intent.putExtra(CalendarContract.Events.TITLE, act.titol);
+            intent.putExtra(CalendarContract.Events.TITLE, act.nom);
             intent.putExtra(CalendarContract.Events.DESCRIPTION, act.desc);
             intent.putExtra(CalendarContract.Events.EVENT_LOCATION, act.lloc);
 
@@ -82,12 +68,10 @@ public class Alertes extends Activity {
             public void onClick(DialogInterface dialog, int which) {
                 switch (which) {
                     case DialogInterface.BUTTON_POSITIVE:
-                        confirm = true;
-                        Toast.makeText(Alertes.this, "Yes Clicked", Toast.LENGTH_LONG).show();
+                        act.afegit=false;
+                        Toast.makeText(Alertes.this, "Torna a clicar sobre l'activitat per afegir-la", Toast.LENGTH_LONG).show();
                         break;
                     case DialogInterface.BUTTON_NEGATIVE:
-                        confirm = false;
-                        Toast.makeText(Alertes.this, "No Clicked", Toast.LENGTH_LONG).show();
                         break;
                 }
             }
@@ -101,19 +85,19 @@ public class Alertes extends Activity {
 
     private void registrarEventos(){
 
-        /// selecciona la lista en pantalla segun su ID
-        ListView lista1 = (ListView) findViewById(R.id.actsList);
+        ArrayList<String> noms = new ArrayList<>();
+        for(int i=0; i<info.size(); i++){noms.add(info.get(i).nom);}
+        ArrayAdapter<String> adaptador;
+        ListView llista = (ListView) findViewById(R.id.actsList);
+        adaptador = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, noms);
+        llista.setAdapter(adaptador);
 
-        // registra una accion para el evento click
-        lista1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        llista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                /// Obtiene el valor de la casilla elegida
                 String itemSeleccionado = adapterView.getItemAtPosition(i).toString();
                 addEventToCalendar(itemSeleccionado);
             }
         });
-
     }
 }

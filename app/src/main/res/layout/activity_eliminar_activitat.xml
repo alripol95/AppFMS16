@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.albertripol.fms16.EliminarActivitat">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="INTRODUEIX EL NOM DE L&apos;ACTIVITAT A ELIMINAR:"
+        android:id="@+id/textView9"
+        android:textSize="20sp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="69dp" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="NOM DE L'ACTIVITAT A SACRIFICAR"
+        android:id="@+id/txtDelAct"
+        android:textSize="20sp"
+        android:layout_marginTop="37dp"
+        android:layout_below="@+id/textView9"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Contrasenya:"
+        android:id="@+id/textView8"
+        android:textSize="20sp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_alignBottom="@+id/txtDelContra"
+        android:layout_alignStart="@+id/textView7" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtDelContra"
+        android:textSize="20sp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="55dp"
+        android:layout_toEndOf="@+id/textView8"
+        android:hint="Contrasenya"
+        android:inputType="textPassword"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Eliminar"
+        android:id="@+id/btnDelAct"
+        android:layout_alignParentBottom="true"
+        android:layout_alignEnd="@+id/txtDelContra"
+        android:onClick="afegirActivitat" />
+</RelativeLayout>

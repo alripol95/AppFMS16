@@ -8,7 +8,7 @@ public class Activitat {
     int h;
     int min;
     int dur;
-    String titol;
+    String nom;
     String desc;
     String lloc;
     boolean afegit;

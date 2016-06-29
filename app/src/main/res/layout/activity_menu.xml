@@ -66,6 +66,25 @@
         android:text="@string/Quiz"
         android:id="@+id/btnQuiz"
         android:layout_alignTop="@+id/btnActs"
-        android:layout_alignLeft="@+id/btnXat"
-        android:layout_alignStart="@+id/btnXat" />
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="75dp"
+        android:text="AFEGIR ACTIVITAT"
+        android:id="@+id/btnAddAct"
+        android:layout_below="@+id/btnActs"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="43dp"
+        android:onClick="afegirActivitat" />
+
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="75dp"
+        android:text="ELIMINAR ACTIVITAT"
+        android:id="@+id/btnDelAct"
+        android:onClick="eliminarActivitat"
+        android:layout_alignTop="@+id/btnAddAct"
+        android:layout_alignParentEnd="true" />
+
 </RelativeLayout>
